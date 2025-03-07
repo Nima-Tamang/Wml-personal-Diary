@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+    <card id="searchForm" title="Search Entries">
+        <p>
+            Search Your Diary:
+        </p>
+        <p>
+            <input name="keyword" type="text"/>
+        </p>
+        <do type="accept" label="Search">
+            <go href="search_results.php" method="get">
+                <postfield name="keyword" value="$(keyword)"/>
+            </go>
+        </do>
+        <do type="prev" label="Back">
+            <prev/>
+        </do>
+    </card>
+</wml>

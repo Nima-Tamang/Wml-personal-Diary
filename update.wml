@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<wml>
+    <card title="Update Diary Entry">
+        <p>
+            Update your diary entry:
+        </p>
+        <!-- Form for updating entry -->
+        <form method="post" action="update_entry.php">
+            <input type="text" name="title" label="Title" value="food" />
+            <input type="text" name="content" label="Content" value="food is amazing" />
+            <input type="submit" value="Update Entry" />
+        </form>
+        <do type="accept" label="Back">
+            <go href="view_entries.wml"/>
+        </do>
+    </card>
+</wml>

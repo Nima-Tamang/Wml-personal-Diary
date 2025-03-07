@@ -1,0 +1,19 @@
+-- Create the database
+CREATE DATABASE IF NOT EXISTS diaryDB;
+
+-- Use the database
+USE diaryDB;
+
+-- Create entries table
+CREATE TABLE IF NOT EXISTS entries (
+    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Optional: Insert some sample data
+INSERT INTO entries (title, content) VALUES 
+('First Entry', 'This is my first diary entry. Today was a great day!'),
+('Meeting Notes', 'Had a meeting with the team about the new project.'),
+('Ideas', 'Need to remember these ideas for the upcoming presentation.');
