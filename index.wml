@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+    <card id="main" title="📖 My Diary">
+        <p align="center">
+            <b>Welcome to Your Personal Diary</b>
+        </p>
+        <p align="center">
+            Keep your thoughts and memories safe!
+        </p>
+        <p align="center">
+            <a href="view_entries.wml"><b>📜 View Entries</b></a><br/>
+            <a href="add_entry.wml"><b>✍️ Add New Entry</b></a><br/>
+            <a href="search_entries.wml"><b>🔍 Search Entries</b></a>
+        </p>
+    </card>
+</wml>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+    <card id="editEntryForm" title="Edit Entry">
+        <onevent type="onenterforward">
+            <refresh>
+                <setvar name="id" value="$(id)"/>
+            </refresh>
+        </onevent>
+        
+        <?php
+        // PHP code to fetch existing entry data
+        $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+        
+        if ($id <= 0) {
+            echo '<p>Invalid entry ID</p>';
+            echo '<do type="prev" label="Back"><prev/></do>';
+            exit();
+        }
+        
+        // Database connection
+        $servername = "localhost:8080";
+        $username = "root";
+        $password = "";
+        $dbname = "diaryDB";
+        
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        
+        if ($conn->connect_error) {
+            echo '<p>Connection failed: ' . $conn->connect_error . '</p>';
+            echo '<do type="prev" label="Back"><prev/></do>';
+            exit();
+        }
+        
+        // Fetch entry data
+        $sql = "SELECT title, content FROM entries WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        if ($result->num_rows == 0) {
+            echo '<p>Entry not found</p>';
+            echo '<do type="prev" label="Back"><prev/></do>';
+            exit();
+        }
+        
+        $row = $result->fetch_assoc();
+        $title = $row['title'];
+        $content = $row['content'];
+        
+        $stmt->close();
+        $conn->close();
+        ?>
+        
+        <p>
+            Edit Diary Entry #<?php echo $id; ?>
+        </p>
+        <p>
+            <b>Title:</b><br/>
+            <input name="title" type="text" value="<?php echo htmlspecialchars($title); ?>"/>
+        </p>
+        <p>
+            <b>Content:</b><br/>
+            <input name="content" type="text" value="<?php echo htmlspecialchars($content); ?>"/>
+        </p>
+        <do type="accept" label="Update">
+            <go href="update_entry.php" method="post">
+                <postfield name="id" value="$(id)"/>
+                <postfield name="title" value="$(title)"/>
+                <postfield name="content" value="$(content)"/>
+            </go>
+        </do>
+        <do type="prev" label="Cancel">
+            <prev/>
+        </do>
+    </card>
+</wml>

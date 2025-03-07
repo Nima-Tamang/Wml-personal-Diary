@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+    <card id="delete" title="🗑️ Delete Entry">
+        <p align="center">
+            <b>Delete a Diary Entry</b>
+        </p>
+        <p>
+            Enter the entry ID to delete:
+        </p>
+        <input name="entryId" type="text" format="*N" size="5" emptyok="false"/>
+        <p align="center">
+            <anchor>
+                <b>🗑️ Delete Entry</b>
+                <go href="delete_entry.wml" method="post">
+                    <postfield name="entryId" value="$(entryId)"/>
+                </go>
+            </anchor>
+        </p>
+        <p align="center">
+            <a href="main.wml">🏠 Back to Home</a>
+        </p>
+    </card>
+</wml>

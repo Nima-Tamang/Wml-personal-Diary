@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<wml>
+    <card title="Diary Entries">
+        <p>
+            Here are your diary entries:
+        </p>
+        <!-- Iterate through diary entries, assuming PHP will display them -->
+        <?php
+        // Database connection
+        $servername = "localhost";
+        $username = "root"; 
+        $password = "";
+        $dbname = "diaryDB"; // Database name
+
+        // Create connection
+        $conn = new mysqli($servername, $username, $password, $dbname);
+
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        // Fetch all diary entries
+        $sql = "SELECT id, title, content FROM entries";
+        $result = $conn->query($sql);
+
+        // Display entries with delete and update options
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo "<p><b>" . htmlspecialchars($row["title"]) . ":</b> " . htmlspecialchars($row["content"]) . "</p>";
+                // Delete option
+                echo "<do type='accept' label='Delete'>
+                        <go href='delete_entry.wml?id=" . $row["id"] . "'/>
+                    </do>";
+                // Update option
+                echo "<do type='accept' label='Update'>
+                        <go href='update_entry.wml?id=" . $row["id"] . "'/>
+                    </do>";
+            }
+        } else {
+            echo "<p>No entries found.</p>";
+        }
+
+        // Close connection
+        $conn->close();
+        ?>
+        <do type="accept" label="Back">
+            <go href="index.wml"/>
+        </do>
+    </card>
+</wml>
